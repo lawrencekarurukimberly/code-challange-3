@@ -16,7 +16,6 @@ function loadFirstFilm(url) {
       displayFilmDetails(data[0]);
 });
 }
-
 function loadAllMovies(url) {
   fetch(url)
     .then(response => response.json())
@@ -26,7 +25,6 @@ function loadAllMovies(url) {
       });
     });
 }
-
 function showMovie(movie) {
   const filmItem = document.createElement('li');
   filmItem.style.cursor = "pointer";
@@ -37,7 +35,6 @@ function showMovie(movie) {
     fetchFilmDetails(movie.id);
 
   });
-
 }
 
 function fetchFilmDetails(movieId) {
@@ -47,7 +44,6 @@ function fetchFilmDetails(movieId) {
       document.getElementById('buy-ticket').textContent = 'Buy Ticket';
       displayFilmDetails(movie);
     });
-
 }
 
 function displayFilmDetails(selectedMovie) {
@@ -74,7 +70,6 @@ function displayFilmDetails(selectedMovie) {
     buyButton.addEventListener('click', () => buyTicketHandler(selectedMovie));
   }
 }
-
 const deleteButton = document.getElementById('button');
 deleteButton.textContent = 'Delete';
 
@@ -85,16 +80,14 @@ deleteButton.addEventListener('click', () =>buyTicketHandler (selectedMovie))
 function buyTicketHandler(movie) {
   const ticketsElement = document.querySelector('#ticket-num');
   let remainingTickets = parseInt(ticketsElement.textContent, 10);
-
-  if (remainingTickets > 0) {
+if (remainingTickets > 0) {
     remainingTickets -= 1;
     ticketsElement.textContent = remainingTickets;
 
     const updatedTicketsSold = movie.tickets_sold + 1;
   }
 }
-
-    fetch(`${API_URL}/${movie.id}`, {
+ fetch(`${API_URL}/${movie.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -107,8 +100,9 @@ function buyTicketHandler(movie) {
         if (remainingTickets === 0) {
           document.getElementById('buy-ticket').textContent = 'Sold Out';
         }
-
-   else {
+else {
     alert('Error, no more tickets available!');
   }
 })
+
+
